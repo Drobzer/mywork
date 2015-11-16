@@ -1,0 +1,268 @@
+<?php
+    session_start();
+    include_once 'includes/connect.php';
+    include_once 'includes/functions.php';
+	date_default_timezone_set('America/Detroit');
+	
+    if(isset($_SESSION['login']) && $_SESSION['login'] == TRUE){
+    
+?>
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>CP</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="style/style.css" media="all" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+       
+        <div class="head">
+            <h1>Welcome <?php echo ucfirst($_SESSION['user']); ?></h1>
+        </div>
+        
+        <div class="nav">
+            <ul>
+                <li><a href="home.php">Home</a></li>
+                <li><a href="schedule.php">Schedule a Remote</a></li>
+                <li><a href="view.php">View Remotes</a></li>
+                <li><a href="report.php">Report</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <div class="left">
+                
+            </div>
+            <div class="right">
+                
+				<div id="content">
+            
+        <?php
+            
+            $result = get_user_for_report_by_id($_SESSION['userid']);
+            
+            $check = mysqli_fetch_array($result);
+            if(!isset($check)){
+                //enter all 0
+                $userid = $_SESSION['userid'];
+				$today = date("Y-m-d");
+				$currtime = date("H:i:s", time());
+				
+                $query = "INSERT INTO report (id, user_id, vmails, calls, remotes, sl, mails, date, time) 
+				          VALUES (NULL, $userid, 0, 0, 0, 0, 0, '$today', '$currtime')";
+                            
+                mysqli_query($link, $query);
+                
+            }
+        ?>
+            
+            <form class="report">
+			<table>
+                <tr>
+				<td>Voice mails:</td>
+                    <td><input type="radio" name="vmails" value="0" 
+                        <?php 
+                        if($check["vmails"] == 0){
+                            echo "checked";
+                        }
+                        ?> 
+                           
+                    /> No
+                    &nbsp;
+					</td>
+                    <td><input type="radio" name="vmails" value="1" 
+                           <?php 
+                        if($check["vmails"] == 1){
+                            echo "checked";
+                        }
+                        ?>
+                    /> Yes
+                
+				</td>
+				</tr>
+                <tr>
+				<td>Calls:</td>
+                    <td colspan="2" ><input type="number" name="calls" value="<?php echo $check["calls"]; ?>" id="calls"/>
+                
+				</td>
+				</tr>
+                <tr>
+				<td>Remotes:</td>
+                    <td colspan="2" ><input type="number" name="remotes" value="<?php echo $check["remotes"]; ?>" id="remotes" />
+                
+				</td>
+				</tr>
+                <tr>
+				<td>Support logs:</td>
+                    <td><input type="radio" name="sl" value="0" 
+                         <?php 
+                        if($check["sl"] == 0){
+                            echo "checked";
+                        }
+                        ?>  
+                    /> No
+                    &nbsp;</td>
+                    <td><input type="radio" name="sl" value="1" 
+                        <?php 
+                        if($check["sl"] == 1){
+                            echo "checked";
+                        }
+                        ?>   
+                    /> Yes
+                </td>
+                </tr>
+				<tr>
+				<td>Mails:</td>
+                    <td><input type="radio" name="mails" value="0" 
+                        <?php 
+                        if($check["mails"] == 0){
+                            echo "checked";
+                        }
+                        ?>   
+                    /> No</td>
+                    &nbsp;
+                    <td><input type="radio" name="mails" value="1" 
+                        <?php 
+                        if($check["mails"] == 1){
+                            echo "checked";
+                        }
+                        ?>   
+                    /> Yes
+                </td>
+                <tr><td><input type="submit" name="submit" value="Generate" /></td>
+                <td colspan="2" ><input type="submit" name="clear" value="Clear" /></td></tr>
+            </form>
+            
+        </table>
+        <?php
+        
+        
+        $result = get_user_for_report_by_id($_SESSION['userid']);
+        $report = mysqli_fetch_array($result);
+        ?>
+        <div id="reptemp">
+            
+            <?php
+            
+            $temp = "<table><tr><td>Report:<br />
+                    I did tickets";
+            
+            if($report["vmails"] !=0){
+                if($report["calls"] + $report["remotes"] + $report["sl"] + $report["mails"] != 0){
+                    $temp .= ", voice mails";
+                }else{
+                    $temp .= " and voice mails";
+                }
+            } 
+            
+            if($report["calls"] !=0){
+                if($report["remotes"] + $report["sl"] + $report["mails"] != 0){
+                    if($report["calls"] > 1){
+                        $temp .= ", ". $report["calls"]." calls";
+                    }else{
+                        $temp .= ", ". $report["calls"]." call";
+                    }
+                }else{
+                    if($report["calls"] > 1){
+                        $temp .= " and ". $report["calls"]." calls";
+                    }else{
+                        $temp .= " and ". $report["calls"]." call";
+                    }
+                }
+            }
+            
+            if($report["remotes"] != 0){
+                if($report["sl"] + $report["mails"] != 0){
+                    if($report["remotes"] > 1){
+                        $temp .= ", ". $report["remotes"]." remotes";
+                    }else{
+                        $temp .= ", ". $report["remotes"]." remote";
+                    }
+                }else{
+                    if($report["remotes"] > 1){
+                        $temp .= " and ". $report["remotes"]." remotes";
+                    }else{
+                        $temp .= " and ". $report["remotes"]." remote";
+                    }
+                }
+            }
+            
+            if($report["sl"] != 0){
+                if($report["mails"] != 0){
+                    $temp .= ", support logs";
+                }else{
+                    $temp .= " and support logs";
+                }
+            }
+            
+            if($report["mails"] !=0){
+                $temp .= " and mailboxes"; 
+            }
+            
+            $temp .= ".</td></tr></table>";
+            
+            echo $temp;
+            ?>
+            
+             <?php
+            
+            if(isset($_GET["submit"])){
+				
+				$today = date("Y-m-d");
+                $query = "UPDATE report SET vmails = '{$_GET["vmails"]}', calls = '{$_GET["calls"]}', remotes = '{$_GET["remotes"]}', 
+                sl = '{$_GET["sl"]}', mails = '{$_GET["mails"]}' WHERE user_id = {$_SESSION['userid']}";
+                
+                mysqli_query($link, $query);
+                if(mysqli_affected_rows($link) != 0){
+                    echo "Updated!";
+                    header("Location: report.php");
+                    exit;
+                    
+                }else{
+                    echo mysqli_error($link);
+                }
+            }
+            
+            if(isset($_GET["clear"])){
+                
+            
+                $query = "update report set vmails = '0', calls = '0', remotes = '0', 
+                sl = '0', mails = '0' where user_id = {$_SESSION['userid']}";
+                
+                mysqli_query($link, $query);
+                if(mysqli_affected_rows($link) != 0){
+                    echo "Updated!";
+                    header("Location: report.php");
+                    exit;
+                
+                }else{
+                    echo mysqli_error($link);
+                }
+            }
+              
+            ?>
+			
+			</div>
+			</div>
+				
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Drobecorp Illuminati</p>
+        </div>
+    </body>
+</html>
+<?php
+    }else{
+        header("Location: loginreg.php");
+        exit;
+    }
+?>

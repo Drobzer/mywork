@@ -1,0 +1,59 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25.10.2015, 03:22:00
+    Author     : Drobzer
+*/
+body{
+    width: 80%;
+    margin: auto;
+    background-color: #52C7B7;
+}
+div#tables-loginreg{
+    margin: auto;
+    height: auto;
+    //background-color: #9ef722;
+    //background-color: #FeFdf3;
+}
+div.buttons{
+    width: 115px;
+    margin: auto;
+    border: 1px solid black;
+}
+div#login{
+    margin-top: 10%;
+    //background-color: #9CC752;
+    
+}
+div#register{
+    margin-top: 20px;
+    //background-color: #9CC788;
+    
+}
+table{
+	width: 25%;
+        margin: auto;
+	background-color: #cccccc;
+	border: 5px ridge #565656;
+        box-shadow: 5px 10px 15px #9CC752;
+	text-align: center;
+}
+td.border{
+	border: 1px solid gray;
+}
+td.box{
+	background-color: #F7FAD2;
+}
+th{
+	color: black;
+        
+}
+div.errors{
+    color: red;
+}
+div.success{
+    color: green;
+}

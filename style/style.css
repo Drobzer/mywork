@@ -1,0 +1,251 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25.10.2015, 02:05:03
+    Author     : Drobzer
+*/
+
+body{
+    width: 1200px;
+    height: 900px;
+    margin: auto;
+    //background-color: chocolate;
+	background-color: #E6E9EB;
+}
+div.head{
+    width: 100%;
+    height: 180px;
+    margin-top: 20px;
+    //border-left: 1px solid black;
+    //border-right: 1px solid black;
+    background-color: cornsilk;
+}
+div.head h1{
+    text-align: center;
+    clear: both;
+   
+}
+div.nav{
+    width: 100%;
+    background-color: #441122;
+}
+div.nav ul{
+    width: 80%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin: auto;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    text-align: center;
+}
+div.nav li{
+    display: inline;
+}
+div.nav ul li a:link, a:visited{
+    width: 120px;
+    font-weight: bold;
+    color: #94F7B7;
+    background-color: #782F47;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+div.nav ul li a:hover, a:active{
+    background-color: #F70C5B ;
+}
+div.content{
+    width: 1200px;
+	height: 100%;
+    padding-top: 50px;
+	padding-bottom: 50px;
+    background-color: cornsilk;
+}
+div.left{
+	float: left;
+    width: 150px;
+	height: 600px;
+	//background-color: #441122;
+    clear: both;
+    margin: 0;
+	padding-bottom: 30px;
+    min-height: 60px;
+}
+div.left ul{
+	padding: 0;
+	margin: 0;
+	text-align: center;
+}
+div.left li{
+	list-style: none;
+	margin: 5px 5px 5px 5px;
+	//background-color: #deee00;
+}
+
+div.left a{
+	text-decoration: none;
+	display: block;
+	color: yellow;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+div.left ul li a:link, a:visited{
+    width: 120px;
+    font-weight: bold;
+    color: #94F7B7;
+    background-color: #782F47;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+	box-shadow: 10px 10px 15px #894058;
+}
+div.left ul li a:hover, a:active{
+    background-color: #F70C5B ;
+}
+
+
+
+div.right{
+	height: 600px;
+	width: 1050px;
+    margin-left: 100px;
+    width: 90%;
+    margin-top: 0;
+    padding-bottom: 30px;
+    min-height: 100px;
+}
+
+div.right h1{
+    margin-top: 0;
+    padding-top: 10px;
+}
+div.right p{
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+div.footer{
+    //border-left: 1px solid black;
+    //border-right: 1px solid black;
+    //border-bottom: 1px solid black;
+    width: 100%;
+    text-align: center;
+    background-color: #441122;
+}
+div.footer p{
+    margin: 0;
+    padding: 5px 0 5px 0;
+    color: #94F7B7;
+}
+
+div#remotes{
+	width: 900px;
+	margin: auto;
+}
+div#remotes table{
+	border: 1px solid black;
+	width: 800px;
+	min-width: 400px;
+	height: 100%;
+	margin: auto;
+	
+}
+div#remotes table tr{
+	background-color: #D5D6BA;
+}
+div#remotes table th{
+	background-color: #F2AC80;
+}
+
+div#resolvedremotes{
+	width: 900px;
+	margin: auto;
+}
+
+div#resolvedremotes table{
+	border: 1px solid black;
+	width: 800px;
+	min-width: 400px;
+	height: 100%;
+	margin: auto;
+}
+div#resolvedremotes table tr{
+	background-color: #D5D6BA;
+}
+div#resolvedremotes table th{
+	background-color: #F2AC80;
+}
+
+form.report{
+	margin: auto;
+	border: 5px ridge #782F47;
+	width: 300px;
+	background-color: #D4D3C7;
+	margin-bottom: 30px;
+	padding: 0 5px 0 5px;
+}
+div#reptemp{
+	margin: auto;
+	border: 5px ridge #782F47;
+	width: 500px;
+	background-color: #D4D3C7;
+	padding: 0 5px 0 5px;
+}
+div.scheduletable{
+	width: 420px;
+	margin: auto;
+}
+div.scheduletable table{
+	border: 5px ridge #782F47;
+	background-color: #D4D3C7;
+	padding: 10px 10px 10px 10px;
+}
+div.scheduletable table form input{
+	margin: 0 15px 0 15px;
+}
+#reschedule_message{
+	color: green;
+	margin: auto;
+}
+#reschedule_error_message{
+	color: #ff0000;
+	margin: auto;
+}
+#problems{
+	width: 900px;
+	margin: auto;
+}
+#problems table{
+	border: 1px solid black;
+	padding: 0 10px 10px 10px;
+}
+#problems td{
+	text-transform: uppercase;
+}
+#problems input{
+	width: 400px;
+}
+#users{
+	width: 100px;
+	margin: auto;
+	border: 1px solid gray;
+}
+#users th{
+	background-color: #eeeeee;
+	width: 100%;
+	padding: 0 5px 0 5px;
+}
+#users td{
+	padding: 0 5px 0 5px;
+}
+tr.first{
+	background-color: #cdcdb4;
+}
+tr.second{
+	background-color: #8b8b7a;
+}
